@@ -1,12 +1,3 @@
-﻿using Microsoft.Owin;
-
-namespace Bookstore.Web.Helpers
-{
-    public static class OwinRequestExtensions
-    {
-        public static string GetReturnUrl(this IOwinRequest request)
-        {
-            return $"{request.Scheme}://{request.Host}/signin-oidc";
-        }
-    }
-}
+// IOwinRequestExtensions removed - OWIN is no longer used.
+// Redirect URI logic is now handled directly in OpenIdConnect events in Program.cs.
+namespace Bookstore.Web.Helpers { }

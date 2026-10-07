@@ -1,6 +1,6 @@
-﻿using System;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,9 +16,9 @@ namespace Bookstore.Domain
 
         public int TotalPages { get; private set; }
 
-        private PaginatedList(){ }
+        private PaginatedList() { }
 
-        public PaginatedList(IQueryable<T> source, int pageIndex, int pageSize) 
+        public PaginatedList(IQueryable<T> source, int pageIndex, int pageSize)
         {
             this.source = source;
             this.pageIndex = pageIndex;
