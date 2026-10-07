@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace BobsBookstoreClassic.Data
 {
@@ -15,20 +15,30 @@ namespace BobsBookstoreClassic.Data
 
         private BookstoreConfiguration()
         {
-            foreach (string key in ConfigurationManager.AppSettings)
-            {
-                _appSettings[key] = ConfigurationManager.AppSettings[key];
+        }
 
-                if (Environment.GetEnvironmentVariable(key) != null)
+        public static void Initialize(IConfiguration configuration)
+        {
+            foreach (var kvp in configuration.AsEnumerable())
+            {
+                if (kvp.Value != null)
                 {
-                    _appSettings[key] = Environment.GetEnvironmentVariable(key);
+                    var value = Environment.GetEnvironmentVariable(kvp.Key) ?? kvp.Value;
+                    Instance._appSettings[kvp.Key] = value;
+
+                    // Also store with "/" separator for backward compatibility with
+                    // callers that use "Section/Key" instead of "Section:Key"
+                    if (kvp.Key.Contains(':'))
+                    {
+                        Instance._appSettings[kvp.Key.Replace(':', '/')] = value;
+                    }
                 }
             }
 
-            foreach (ConnectionStringSettings connectionStringSettings in ConfigurationManager.ConnectionStrings)
+            var connectionStringsSection = configuration.GetSection("ConnectionStrings");
+            foreach (var child in connectionStringsSection.GetChildren())
             {
-                _connectionStrings[connectionStringSettings.Name] = connectionStringSettings.ConnectionString;
-
+                Instance._connectionStrings[child.Key] = child.Value;
             }
         }
 
