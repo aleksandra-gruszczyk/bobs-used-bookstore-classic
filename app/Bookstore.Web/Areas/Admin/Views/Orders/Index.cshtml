@@ -14,7 +14,9 @@
         <form class="row row-cols-lg-auto g-3 align-items-center" method="get">
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Reference data type</label>
-                @Html.EnumDropDownListFor(a => a.Filters.OrderStatusFilter, "All Order Statuses", new { @class = "form-select" })
+                <select asp-for="Filters.OrderStatusFilter" asp-items="Html.GetEnumSelectList(typeof(Bookstore.Domain.Orders.OrderStatus))" class="form-select">
+                    <option value="">All Order Statuses</option>
+                </select>
             </div>
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Order date from</label>
@@ -40,7 +42,7 @@
 <div class="card m-3">
     <div class="card-header">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            <partial name="_Paginator" />
         </div>
     </div>
 
@@ -76,7 +78,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            @Html.Partial("_Paginator")
+            <partial name="_Paginator" />
         </div>
     </div>
 </div>
