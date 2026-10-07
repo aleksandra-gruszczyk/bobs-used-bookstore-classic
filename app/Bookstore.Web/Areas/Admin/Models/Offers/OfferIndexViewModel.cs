@@ -1,10 +1,10 @@
-﻿using Bookstore.Domain;
+using Bookstore.Domain;
 using Bookstore.Domain.Offers;
 using Bookstore.Domain.ReferenceData;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace Bookstore.Web.Areas.Admin.Models.Offers
 {

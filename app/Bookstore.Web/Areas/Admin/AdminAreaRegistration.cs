@@ -1,24 +1,3 @@
-﻿using System.Web.Mvc;
-
-namespace Bookstore.Web.Areas
-{
-    public class AdminAreaRegistration : AreaRegistration 
-    {
-        public override string AreaName 
-        {
-            get 
-            {
-                return "Admin";
-            }
-        }
-
-        public override void RegisterArea(AreaRegistrationContext context) 
-        {
-            context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }, namespaces: new[] { "Bookstore.Web.Areas.Admin.Controllers" }
-            );
-        }
-    }
-}
+// AdminAreaRegistration is no longer needed in ASP.NET Core.
+// Area routing is configured in Program.cs via MapControllerRoute with area pattern.
+namespace Bookstore.Web.Areas { }

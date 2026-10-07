@@ -1,13 +1,2 @@
-﻿using System.Web.Mvc;
-
-namespace Bookstore.Web
-{
-    public class FilterConfig
-    {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
-            filters.Add(new AuthorizeAttribute());
-        }
-    }
-}
+// This file is kept for reference only. Filter configuration is now handled in Program.cs.
+namespace Bookstore.Web { }
