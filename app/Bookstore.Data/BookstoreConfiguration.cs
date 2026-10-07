@@ -23,11 +23,14 @@ namespace BobsBookstoreClassic.Data
             {
                 if (kvp.Value != null)
                 {
-                    Instance._appSettings[kvp.Key] = kvp.Value;
+                    var value = Environment.GetEnvironmentVariable(kvp.Key) ?? kvp.Value;
+                    Instance._appSettings[kvp.Key] = value;
 
-                    if (Environment.GetEnvironmentVariable(kvp.Key) != null)
+                    // Also store with "/" separator for backward compatibility with
+                    // callers that use "Section/Key" instead of "Section:Key"
+                    if (kvp.Key.Contains(':'))
                     {
-                        Instance._appSettings[kvp.Key] = Environment.GetEnvironmentVariable(kvp.Key);
+                        Instance._appSettings[kvp.Key.Replace(':', '/')] = value;
                     }
                 }
             }
